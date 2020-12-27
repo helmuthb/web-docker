@@ -2,7 +2,8 @@ FROM php:7.4-apache
 
 # Code mostly copied over from WordPress Dockerfile
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ghostscript && \
+    DEBIAN_FRONTEND=noninteractive \
+      apt-get install -y --no-install-recommends ghostscript nullmailer && \
     rm -rf /var/lib/apt/lists/*
 
 # install a couple of useful PHP extension
@@ -14,7 +15,7 @@ RUN SAVED_MARK=`apt-mark showmanual` && \
         libpng-dev libzip-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j "$(nproc)" \
-        bcmath exif gd mysqli zip && \
+        bcmath exif gd gettext mysqli pdo_mysql zip && \
     pecl install imagick-3.4.4 && \
     docker-php-ext-enable imagick && \
     apt-mark auto '.*' > /dev/null && \
