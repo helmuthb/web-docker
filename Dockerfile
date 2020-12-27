@@ -3,7 +3,7 @@ FROM php:7.4-apache
 # Code mostly copied over from WordPress Dockerfile
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
-      apt-get install -y --no-install-recommends ghostscript nullmailer && \
+      apt-get install -y --no-install-recommends ghostscript msmtp && \
     rm -rf /var/lib/apt/lists/*
 
 # install a couple of useful PHP extension
