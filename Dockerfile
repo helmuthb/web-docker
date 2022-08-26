@@ -53,7 +53,7 @@ RUN docker-php-ext-enable opcache && \
         echo 'html_errors = Off'; \
     } > /usr/local/etc/php/conf.d/error-logging.ini
 
-RUN a2enmod rewrite expires remoteip && \
+RUN a2enmod headers rewrite expires remoteip && \
     { \
         echo 'RemoteIPHeader X-Forwarded-For'; \
         echo 'RemoteIPTrustedProxy 10.0.0.0/8'; \
